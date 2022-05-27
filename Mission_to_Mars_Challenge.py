@@ -142,49 +142,32 @@ url = 'https://marshemispheres.com/'
 
 browser.visit(url)
 
-
-# In[17]:
-
-
-html = browser.html
-img_hemisphere_soup = soup(html, 'html.parser')
-
 # # 2. Create a list to hold the images and titles.
 hemisphere_image_urls = []
 
 # # 3. Write code to retrieve the image urls and titles for each hemisphere.
-img_soups =  img_hemisphere_soup.find('div', class_="item")
-
+  
 for i in range(4):
     
     hemisphere = {}
     browser.find_by_css('a.product-item h3')[i].click()
     
     sample_element = browser.find_by_text("Sample").first
+    title_element = browser.find_by_css("h2.title").text
+    
     hemisphere["img_url"] = sample_element["href"]
-    
-    hemisphere["title"] = browser.find_by_css("h2.title").text
-    
+    hemisphere["title"] = title_element
     hemisphere_image_urls.append(hemisphere)
     
     browser.back()
 
-
-# In[18]:
-
-
 # 4. Print the list that holds the dictionary of each image url and title.
 hemisphere_image_urls
-
-
-# In[19]:
-
 
 # 5. Quit the browser
 browser.quit()
 
 
-# In[ ]:
 
 
 
